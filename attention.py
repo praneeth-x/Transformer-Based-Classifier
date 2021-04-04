@@ -14,7 +14,7 @@ class get_q(keras.Model):
 			trainable=True
 			)
 	def call(self,data):
-		return tf.matmul(data,weight_q)
+		return tf.matmul(data,self.weight_q)
 
 class get_k(keras.Model):
 	def __init__(self,d_model,expeced_len):
@@ -26,7 +26,7 @@ class get_k(keras.Model):
 			trainable=True
 			)
 	def call(self,data):
-		return tf.matmul(data,weight_k)
+		return tf.matmul(data,self.weight_k)
 
 class get_v(keras.Model):
 	def __init__(self,d_model,expected_len):
@@ -38,7 +38,7 @@ class get_v(keras.Model):
 			trainable=True
 			)
 	def call(self,data):
-		return tf.matmul(data,weight_v)
+		return tf.matmul(data,self.weight_v)
 
 def scaled_dot_product_attention(q,k,v,d_model):
 		temp=(tf.matmul(q,tf.transpose(k)))/math.sqrt(d_model)
@@ -61,7 +61,7 @@ class linearlayer(keras.Model):
 			trainable=True
 			)
 	def call(self,data):
-		return tf.matmul(w,x)+b
+		return tf.matmul(self.w,data)+self.b
 
 class MultiHeadAttention(keras.Model):
 	def __init__(self,number_heads,max_seq_len,d_model,expected_len):
@@ -86,7 +86,7 @@ class MultiHeadAttention(keras.Model):
 		out=z_list[0]
 		for i in range(1,len(z_list)):
 			tf.concat(out,z_list[i],axis=0)
-		out=linear_layer(out)
+		out=self.linear_layer(out)
 		return out
 
 
