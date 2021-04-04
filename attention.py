@@ -46,18 +46,18 @@ def scaled_dot_product_attention(q,k,v,d_model):
 		return tf.matmul(temp1*v) 
 
 class linearlayer(keras.Model):
-	def __init__(self,max_seq_len,number_heads):
-		super(linearlayer).__init__()
+	def __init__(self,max_seq_len,number_heads,d_model):
+		super(linearlayer,self).__init__()
 		self.w=self.add_weight(
 			name='linear',
 			shape=(max_seq_len,max_seq_len*number_heads),
-			initalizer='random_normal',
+			initializer='random_normal',
 			trainable=True
 			)
 		self.b=self.add_weight(
 			name='bias',
 			shape=(max_seq_len,d_model),
-			initalizer='random_normal',
+			initializer='random_normal',
 			trainable=True
 			)
 	def call(self,data):
@@ -65,13 +65,13 @@ class linearlayer(keras.Model):
 
 class MultiHeadAttention(keras.Model):
 	def __init__(self,number_heads,max_seq_len,d_model,expected_len):
-		super(MultiHeadAttention).__init__()
+		super(MultiHeadAttention,self).__init__()
 		self.number_heads=number_heads
 		self.d_model=d_model
 		self.expected_len=expected_len
 		self.z_list=[]
 		self.max_seq_len=max_seq_len
-		self.liner_layer=linearlayer(max_seq_len,number_heads)
+		self.liner_layer=linearlayer(max_seq_len,number_heads,d_model)
 
 	def call(self,data):
 		for i in range(number_heads):

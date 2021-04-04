@@ -19,7 +19,7 @@ class Transformer(keras.Model):
 		self.encoder_list=[]
 		self.Input_layer=InputLayer(input_shape=(max_seq_len,d_model),batch_size=3,name='input',dtype='float64')
 		for i in range(num_encoders):
-			self.encoder_list.append(encoder.encoder(num_heads,max_seq_len,d_model,expected_len))
+			self.encoder_list.append(encoder.encoder(self.num_heads,self.max_seq_len,self.d_model,self.expected_len))
 
 	def positional_encoding(max_seq_len,d_model):
 		positional=tf.zeros(shape=(max_seq_len,d_model), dtype='float64')
@@ -31,7 +31,7 @@ class Transformer(keras.Model):
 
 	def call(self,dataframe):
 		self.postional=positional_encoding(self.max_seq_len,self.d_model)
-		data=Input_layer(dataframe)
+		data=tf.constant(dataframe,shape=(self.max_seq_len,self.d_model),dtype='float64')
 		self.positional_data=data+postional
 		for enc in self.encoder_list:
 			self.positional_data=enc(data=self.positional_data)

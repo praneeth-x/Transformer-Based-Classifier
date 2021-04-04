@@ -3,7 +3,7 @@ from tensorflow import keras
 import attention
 class feed_forward(keras.Model):
 	def __init__(self,max_seq_len,d_model):
-		super(feed_forward).__init__()
+		super(feed_forward,self).__init__()
 		self.d_model=d_model
 		self.max_seq_len=max_seq_len
 		self.weights_encoder=self.add_weight(
@@ -23,7 +23,7 @@ class feed_forward(keras.Model):
 
 class encoder(keras.Model):
 	def __init__(self,number_heads,max_seq_len,d_model,expected_len):
-		super(encoder).__init__()
+		super(encoder,self).__init__()
 		self.number_heads=number_heads
 		self.max_seq_len=max_seq_len
 		self.d_model=d_model
