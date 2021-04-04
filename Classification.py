@@ -5,10 +5,9 @@ import math
 class classification_model(keras.Model):
 	def __init__(self,num_layers,num_classes,feature_no):
 		super(classification_model,self).__init__()
-		self.data=data
 		self.num_classes=num_classes
 		self.num_layers=num_layers
-		self.num_neurons=math.floor(math.sqrt(self.feature_no*self.num_classes))
+		self.num_neurons=math.floor(math.sqrt(feature_no*num_classes))
 		self.layers_list=[]
 		for i in range(num_layers-1):
 			self.layers_list.append(Dense(self.num_neurons-i,activation='relu'))

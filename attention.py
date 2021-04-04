@@ -10,7 +10,7 @@ class get_q(keras.Model):
 		self.weight_q=self.add_weight(
 			name='wq',
 			shape=(d_model,expected_len),
-			initalizer='random_normal',
+			initializer='random_normal',
 			trainable=True
 			)
 	def call(self,data):
@@ -22,7 +22,7 @@ class get_k(keras.Model):
 		self.weight_k=self.add_weight(
 			name='wk',
 			shape=(d_model,expeced_len),
-			intializer='random_normal',
+			initializer='random_normal',
 			trainable=True
 			)
 	def call(self,data):
