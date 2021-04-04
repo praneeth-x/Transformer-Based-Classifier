@@ -5,6 +5,17 @@ import pandas as pd
 import Classification 
 import encoder
 from tensorflow.keras.layers import InputLayer
+
+def positional_encoding(max_seq_len,d_model):
+	positional=np.zeros(shape=(max_seq_len,d_model), dtype='float64')
+	for i in range(max_seq_len):
+		for j in range(0,d_model,2):
+		   positional[i,j]=np.sin(i/(10000**((2*j)/d_model)))
+		   if(i==max_seq_len-1):
+		   	 break
+		   positional[i+1,j]=np.sin(i/(10000**((2*j+1)/d_model)))
+	return tf.constant(positional,shape=(max_seq_len,d_model),dtype='float64')
+
 class Transformer(keras.Model):
 	def __init__(self,max_seq_len,d_model,num_encoders,num_heads,num_classes):
 		super(Transformer,self).__init__()
@@ -20,14 +31,6 @@ class Transformer(keras.Model):
 		self.Input_layer=InputLayer(input_shape=(max_seq_len,d_model),batch_size=3,name='input',dtype='float64')
 		for i in range(num_encoders):
 			self.encoder_list.append(encoder.encoder(self.num_heads,self.max_seq_len,self.d_model,self.expected_len))
-
-	def positional_encoding(max_seq_len,d_model):
-		positional=tf.zeros(shape=(max_seq_len,d_model), dtype='float64')
-		for i in range(max_seq_len):
-			for j in range(0,d_model,2):
-			   positional[i,j]=tf.sin(i/(10000**((2*j)/d_model)))
-			   positional[i+1,j]=tf.sin(i/(10000**((2*j+1)/d_model)))
-		return positional
 
 	def call(self,dataframe):
 		self.postional=positional_encoding(self.max_seq_len,self.d_model)
