@@ -19,6 +19,7 @@ def positional_encoding(max_seq_len,d_model):
 class Transformer(keras.Model):
 	def __init__(self,max_seq_len,d_model,num_encoders,num_heads,num_classes):
 		super(Transformer,self).__init__()
+		self.call_number=0
 		self.max_seq_len=max_seq_len
 		self.d_model=d_model
 		self.num_encoders=num_encoders
@@ -36,6 +37,7 @@ class Transformer(keras.Model):
 		postional=positional_encoding(self.max_seq_len,self.d_model)
 		data=tf.reshape(dataframe,shape=(self.max_seq_len,self.d_model))
 		self.positional_data=data+postional
+		print('call number is ',self.call_number)
 		i=0
 		for enc in self.encoder_list:
 			print("i=",i)
@@ -46,5 +48,7 @@ class Transformer(keras.Model):
 		print('came here')
 		final_data=tf.reshape(self.positional_data,[1,-1])
 		output=self.classify(final_data)
+		self.call_number+=1;
+		print('returning successfully')
 		return output
 
