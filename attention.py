@@ -73,16 +73,19 @@ class MultiHeadAttention(keras.Model):
 		self.max_seq_len=max_seq_len
 		self.linear_layer=linearlayer(max_seq_len,number_heads,d_model)
 		self.q_list=[]
+		self.v_list=[]
 		self.k_list=[]
-		self.q_value_calc=get_q(self.d_model,self.expected_len)
-		self.k_value_calc=get_k(self.d_model,self.expected_len)
-		self.v_value_calc=get_v(self.d_model,self.expected_len)
+		for i in range(self.number_heads):
+			q_list.append(get_q(self.d_model,self.expected_len))
+			k_list.append(get_k(self.d_model,self.expected_len))
+			v_list.append(get_v(self.d_model,self.expected_len))
+
 
 	def call(self,data):
 		for i in range(self.number_heads):
-			q=q_value_calc(data)
-			k=k_value_calc(data)
-			v=v_value_calc(data)
+			q=self.q_list[i](data)
+			k=self.k_list[i](data)
+			v=self.v_list[i](data)
 			z=scaled_dot_product_attention(q,k,v,self.d_model)
 			self.z_list.append(z)
 		out=self.z_list[0]
