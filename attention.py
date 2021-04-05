@@ -71,7 +71,7 @@ class MultiHeadAttention(keras.Model):
 		self.expected_len=expected_len
 		self.z_list=[]
 		self.max_seq_len=max_seq_len
-		self.linear_layer=linearlayer(max_seq_len,number_heads,d_model)
+		self.linear_layer=linearlayer(self.max_seq_len,self.number_heads,self.d_model)
 		self.q_list=[]
 		self.v_list=[]
 		self.k_list=[]
@@ -81,7 +81,6 @@ class MultiHeadAttention(keras.Model):
 			self.v_list.append(get_v(self.d_model,self.expected_len))
 
 	def call(self,data):
-		print('number of heads here=',self.number_heads)
 		for i in range(self.number_heads):
 			q=self.q_list[i](data)
 			k=self.k_list[i](data)
@@ -91,8 +90,8 @@ class MultiHeadAttention(keras.Model):
 		out=self.z_list[0]
 		for i in range(1,len(self.z_list)):
 			out=tf.concat([out,self.z_list[i]],axis=0)
-			print(len(self.z_list))
 		out=self.linear_layer(out)
+		z_list.clear()
 		return out
 
 

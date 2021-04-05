@@ -33,7 +33,6 @@ class encoder(keras.Model):
 		self.normalise2=tf.keras.layers.LayerNormalization(epsilon=1e-6)
 		self.drop1=tf.keras.layers.Dropout(0.1)
 		self.forward=feed_forward(max_seq_len,d_model)
-		print('number of heads created =',self.number_heads)
 	
 	def call(self,data):
 		attention_output=self.mha(data)
