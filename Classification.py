@@ -15,8 +15,8 @@ class classification_model(keras.Model):
 		self.layers_list.append(Dense(num_classes,activation='softmax'))
 
 	def call(self,data):
-		out=Dense(num_neurons,activation='relu')(data)
-		for layer in layers_list:
+		out=Dense(self.num_neurons,activation='relu')(data)
+		for layer in self.layers_list:
 			out=layer(out)
 		return out
 

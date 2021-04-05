@@ -43,7 +43,7 @@ class get_v(keras.Model):
 def scaled_dot_product_attention(q,k,v,d_model):
 		temp=(tf.matmul(q,tf.transpose(k)))/math.sqrt(d_model)
 		temp1=tf.nn.softmax(temp)
-		return tf.matmul(temp1*v) 
+		return tf.matmul(temp1,v) 
 
 class linearlayer(keras.Model):
 	def __init__(self,max_seq_len,number_heads,d_model):
@@ -71,21 +71,28 @@ class MultiHeadAttention(keras.Model):
 		self.expected_len=expected_len
 		self.z_list=[]
 		self.max_seq_len=max_seq_len
-		self.liner_layer=linearlayer(max_seq_len,number_heads,d_model)
+		self.linear_layer=linearlayer(max_seq_len,number_heads,d_model)
+		self.q_list=[]
+		self.k_list=[]
+		self.v_list=[]
+		for i in range(self.number_heads):
+			q1=get_q(self.d_model,self.expected_len)
+			q=q1(data)
+			k1=get_k(self.d_model,self.expected_len)
+			k=k1(data)
+			v1=get_k(self.d_model,self.expected_len)
+			v=v1(data)
+			self.q_list.append(q)
+			self.k_list.append(k)
+			self.v_list.append(v)
 
 	def call(self,data):
-		for i in range(number_heads):
-			q1=get_q(d_model,expected_len)
-			q=q1(data)
-			k1=get_k(d_model,expected_len)
-			k=k1(data)
-			v1=get_k(d_model,expected_len)
-			v=v1(data)
-			z=scaled_dot_product_attention(q,k,v,d_model)
+		for i in range(self.number_heads):
+			z=scaled_dot_product_attention(self.q_list[i],self.k_list[i],self.v_list[i],self.d_model)
 			self.z_list.append(z)
-		out=z_list[0]
-		for i in range(1,len(z_list)):
-			tf.concat(out,z_list[i],axis=0)
+		out=self.z_list[0]
+		for i in range(1,len(self.z_list)):
+			out=tf.concat([out,self.z_list[i]],axis=0)
 		out=self.linear_layer(out)
 		return out
 

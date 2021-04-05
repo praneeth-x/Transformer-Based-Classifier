@@ -33,12 +33,12 @@ class Transformer(keras.Model):
 			self.encoder_list.append(encoder.encoder(self.num_heads,self.max_seq_len,self.d_model,self.expected_len))
 
 	def call(self,dataframe):
-		self.postional=positional_encoding(self.max_seq_len,self.d_model)
-		data=tf.reshape(dataframe,self.max_seq_len,self.d_model)
+		postional=positional_encoding(self.max_seq_len,self.d_model)
+		data=tf.reshape(dataframe,shape=(self.max_seq_len,self.d_model))
 		self.positional_data=data+postional
 		for enc in self.encoder_list:
 			self.positional_data=enc(data=self.positional_data)
-		final_data=tf.reshape(positional_data,[-1])
+		final_data=tf.reshape(self.positional_data,[1,-1])
 		output=self.classify(final_data)
 		return output
 

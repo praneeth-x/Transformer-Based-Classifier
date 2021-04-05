@@ -36,7 +36,7 @@ class encoder(keras.Model):
 	
 	def call(self,data):
 		attention_output=self.mha(data)
-		attention_output=self.drop1(attention_output,training=training)
+		attention_output=self.drop1(attention_output)
 		first_out=self.normalise1(attention_output+data)
 		first_out1=self.forward(first_out)
 		out=self.normalise2(first_out1+first_out)
