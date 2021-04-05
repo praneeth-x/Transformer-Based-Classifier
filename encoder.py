@@ -28,11 +28,12 @@ class encoder(keras.Model):
 		self.max_seq_len=max_seq_len
 		self.d_model=d_model
 		self.expected_len=expected_len
-		self.mha=attention.MultiHeadAttention(number_heads=number_heads,max_seq_len=max_seq_len,d_model=d_model,expected_len=expected_len)
+		self.mha=attention.MultiHeadAttention(number_heads=self.number_heads,max_seq_len=self.max_seq_len,d_model=self.d_model,expected_len=self.expected_len)
 		self.normalise1=tf.keras.layers.LayerNormalization(epsilon=1e-6)
 		self.normalise2=tf.keras.layers.LayerNormalization(epsilon=1e-6)
 		self.drop1=tf.keras.layers.Dropout(0.1)
 		self.forward=feed_forward(max_seq_len,d_model)
+		print('number of heads created =',self.number_heads)
 	
 	def call(self,data):
 		attention_output=self.mha(data)

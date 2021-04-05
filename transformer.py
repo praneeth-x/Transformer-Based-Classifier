@@ -29,7 +29,6 @@ class Transformer(keras.Model):
 		self.num_features=max_seq_len*d_model
 		self.classify=Classification.classification_model(num_layers=4,num_classes=7,feature_no=self.num_features)
 		self.encoder_list=[]
-		self.Input_layer=InputLayer(input_shape=(max_seq_len,d_model),batch_size=3,name='input',dtype='float32')
 		for i in range(self.num_encoders):
 			self.encoder_list.append(encoder.encoder(self.num_heads,self.max_seq_len,self.d_model,self.expected_len))
 			print(f'encoder {i} is done')

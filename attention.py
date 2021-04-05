@@ -81,6 +81,7 @@ class MultiHeadAttention(keras.Model):
 			self.v_list.append(get_v(self.d_model,self.expected_len))
 
 	def call(self,data):
+		print('number of heads here=',self.number_heads)
 		for i in range(self.number_heads):
 			q=self.q_list[i](data)
 			k=self.k_list[i](data)
