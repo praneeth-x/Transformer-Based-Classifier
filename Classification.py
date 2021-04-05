@@ -9,14 +9,14 @@ class classification_model(keras.Model):
 		self.num_layers=num_layers
 		self.num_neurons=math.floor(math.sqrt(feature_no*num_classes))
 		self.layers_list=[]
-		for i in range(num_layers-1):
+		for i in range(num_layers):
 			self.layers_list.append(Dense(self.num_neurons-i,activation='relu'))
 			self.layers_list.append(Dropout(0.3))
 		self.layers_list.append(Dense(num_classes,activation='softmax'))
 
 	def call(self,data):
-		out=Dense(self.num_neurons,activation='relu')(data)
-		for layer in self.layers_list:
-			out=layer(out)
+		out=self.layers_list[0](data)
+		for i in range(1,len(self.layers_list)):
+			out=self.layers_list[i](out)
 		return out
 
