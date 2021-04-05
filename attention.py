@@ -76,10 +76,9 @@ class MultiHeadAttention(keras.Model):
 		self.v_list=[]
 		self.k_list=[]
 		for i in range(self.number_heads):
-			q_list.append(get_q(self.d_model,self.expected_len))
-			k_list.append(get_k(self.d_model,self.expected_len))
-			v_list.append(get_v(self.d_model,self.expected_len))
-
+			self.q_list.append(get_q(self.d_model,self.expected_len))
+			self.k_list.append(get_k(self.d_model,self.expected_len))
+			self.v_list.append(get_v(self.d_model,self.expected_len))
 
 	def call(self,data):
 		for i in range(self.number_heads):
@@ -87,10 +86,12 @@ class MultiHeadAttention(keras.Model):
 			k=self.k_list[i](data)
 			v=self.v_list[i](data)
 			z=scaled_dot_product_attention(q,k,v,self.d_model)
+			print(tf.shape(z))
 			self.z_list.append(z)
 		out=self.z_list[0]
 		for i in range(1,len(self.z_list)):
 			out=tf.concat([out,self.z_list[i]],axis=0)
+			print(tf.shape(out))
 		out=self.linear_layer(out)
 		return out
 
