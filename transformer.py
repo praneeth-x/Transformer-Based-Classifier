@@ -31,7 +31,7 @@ class Transformer(keras.Model):
 		self.Input_layer=InputLayer(input_shape=(max_seq_len,d_model),batch_size=3,name='input',dtype='float32')
 		for i in range(num_encoders):
 			self.encoder_list.append(encoder.encoder(self.num_heads,self.max_seq_len,self.d_model,self.expected_len))
-
+			print(f'encoder {i} is done')
 	def call(self,dataframe):
 		postional=positional_encoding(self.max_seq_len,self.d_model)
 		data=tf.reshape(dataframe,shape=(self.max_seq_len,self.d_model))
