@@ -29,7 +29,7 @@ class Transformer(keras.Model):
 		self.classify=Classification.classification_model(num_layers=4,num_classes=7,feature_no=self.num_features)
 		self.encoder_list=[]
 		self.Input_layer=InputLayer(input_shape=(max_seq_len,d_model),batch_size=3,name='input',dtype='float32')
-		for i in range(num_encoders):
+		for i in range(self.num_encoders):
 			self.encoder_list.append(encoder.encoder(self.num_heads,self.max_seq_len,self.d_model,self.expected_len))
 			print(f'encoder {i} is done')
 	def call(self,dataframe):
@@ -39,6 +39,7 @@ class Transformer(keras.Model):
 		i=0
 		for enc in self.encoder_list:
 			print("i=",i)
+			i+=1
 			self.positional_data=enc(data=self.positional_data)
 			print(tf.shape(self.positional_data))
 			print(self.positional_data)
