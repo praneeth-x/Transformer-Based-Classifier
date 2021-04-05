@@ -90,7 +90,7 @@ class MultiHeadAttention(keras.Model):
 		out=self.z_list[0]
 		for i in range(1,len(self.z_list)):
 			out=tf.concat([out,self.z_list[i]],axis=0)
-			print(len(z_list))
+			print(len(self.z_list))
 		out=self.linear_layer(out)
 		return out
 

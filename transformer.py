@@ -38,6 +38,8 @@ class Transformer(keras.Model):
 		self.positional_data=data+postional
 		for enc in self.encoder_list:
 			self.positional_data=enc(data=self.positional_data)
+			print(tf.shape(positional_data))
+			print(positional_data)
 		final_data=tf.reshape(self.positional_data,[1,-1])
 		output=self.classify(final_data)
 		return output
