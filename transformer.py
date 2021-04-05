@@ -38,6 +38,10 @@ class Transformer(keras.Model):
 		data=tf.reshape(dataframe,shape=(self.max_seq_len,self.d_model))
 		self.positional_data=data+postional
 		print('call number is ',self.call_number)
+		print('max_seq_len=',max_seq_len)
+		print('num_encoders=',num_encoders)
+		print('num_heads='num_heads)
+		print('num_classes=',num_classes)
 		i=0
 		for enc in self.encoder_list:
 			print("i=",i)
