@@ -13,7 +13,7 @@ class feed_forward(keras.Model):
 			trainable=True
 			)
 		self.bias=self.add_weight(
-			name='bias',
+			name='bias1',
 			shape=(self.max_seq_len,self.d_model),
 			initializer='random_normal',
 			trainable=True
