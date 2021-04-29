@@ -7,7 +7,7 @@ keep the code you are writing tin the same folder in which the current package i
 **from transformer import Transformer**
 Now declare a Transformer object as the pass the required arguments. Transformer takes 6 arguments as shown below.
 object=Transformer(\
- &nbsp max_seq_len, # pass the maximum length of the sequence example in case of text max number of words in sentance.\
+ &nbsp; max_seq_len, # pass the maximum length of the sequence example in case of text max number of words in sentance.\
  &nbsp d_model, # this is length of each vector in the sequence example in case to text it is embedded vector length. \
  &nbsp num_encoders, # pass number of encoders you want the transformer to have.\
  &nbsp num_heads, # this specifies number of attention heads inside each encoder.\
