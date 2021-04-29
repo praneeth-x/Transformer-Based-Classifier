@@ -27,11 +27,11 @@ The input is going to be 2-D array with words stacked along axis=1(or can be see
 
 #### 1. Positional encoding: 
 
-Not only the selection of words in sequence the position of those words in sequence dictates the meaning example "This apple is good" , "is good apple This" both contain same words but the relative positions of words in the sequence changed the meaning of the sentence.\
+Not only the selection of words in sequence the position of those words in sequence dictates the meaning example "This apple is good" , "is good apple This" both contain same words but the relative positions of words in the sequence changed the meaning of the sentence.
 
 The information about the relative position of the words is added using a positional encoding formula as \
     PE(𝑝𝑜𝑠,2𝑖)=𝑠𝑖𝑛(𝑝𝑜𝑠100002𝑖/𝑑𝑚𝑜𝑑𝑒𝑙),\
-    PE(𝑝𝑜𝑠,2𝑖+1)=𝑐𝑜𝑠(𝑝𝑜𝑠100002𝑖/𝑑𝑚𝑜𝑑𝑒𝑙).\\
+    PE(𝑝𝑜𝑠,2𝑖+1)=𝑐𝑜𝑠(𝑝𝑜𝑠100002𝑖/𝑑𝑚𝑜𝑑𝑒𝑙).\
     
 where i is in the direction of the embeddings (if each word is encoded as a vector of size 512 then i runs for 0 to 511 for each word in the sequence)\
 pos is in the direction of sequence (ie position for first word =0 and position for second word is 1 and so on position of last word is lenngth of sequence-1)\
