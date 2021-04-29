@@ -38,18 +38,18 @@ pos is in the direction of sequence (ie position for first word =0 and position 
 
 #### 2. Encoder stack 
 
-Encoder stack basically extracts the contextual information of the data using attention mechanism \
+Encoder stack basically extracts the contextual information of the data using attention mechanism 
 
 ###### Attention Mechanism:
 
 It is the key component of the encoder stack it is implemented using attention heads. Attention heads compute relavance of each point in sequence with every other point in the sequence and thus obtains a contextual information. this is done by computing query,key and value vectors which are obtained by multiplying the input with trainable weights.contextual information is obtained by computing the scaled dot product of the query,key and values given as\
 
-  attention(Q,K,V) = softmax (QKT √ dK ) V,\
+  attention(Q,K,V) = softmax (QKT √ dK ) V,
 
 A single encoder consists of multiple attention heads all the outputs of the attention heads and concatenated and linearly scaled to get a final output which is passed as input to other consecutive encoders and final layer passes the contextual information to the classification layer.\
 
 #### 3. Classification Model.
 
-the final step of the model is to classify the sequences from the contextual information passed this is implemented using a simple deep nueral network classifier to classify outputs based on the contextual information. \
+the final step of the model is to classify the sequences from the contextual information passed this is implemented using a simple deep nueral network classifier to classify outputs based on the contextual information. 
   
 #### for further understanding visit https://towardsdatascience.com/transformers-141e32e69591
