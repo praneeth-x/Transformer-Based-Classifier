@@ -31,10 +31,10 @@ Not only the selection of words in sequence the position of those words in seque
 
 The information about the relative position of the words is added using a positional encoding formula as \
     PE(𝑝𝑜𝑠,2𝑖)=𝑠𝑖𝑛(𝑝𝑜𝑠100002𝑖/𝑑𝑚𝑜𝑑𝑒𝑙), \
-    PE(𝑝𝑜𝑠,2𝑖+1)=𝑐𝑜𝑠(𝑝𝑜𝑠100002𝑖/𝑑𝑚𝑜𝑑𝑒𝑙). \
+    PE(𝑝𝑜𝑠,2𝑖+1)=𝑐𝑜𝑠(𝑝𝑜𝑠100002𝑖/𝑑𝑚𝑜𝑑𝑒𝑙). 
     
 where i is in the direction of the embeddings (if each word is encoded as a vector of size 512 then i runs for 0 to 511 for each word in the sequence)\
-pos is in the direction of sequence (ie position for first word =0 and position for second word is 1 and so on position of last word is lenngth of sequence-1)\
+pos is in the direction of sequence (ie position for first word =0 and position for second word is 1 and so on position of last word is lenngth of sequence-1)
 
 #### 2. Encoder stack 
 
@@ -42,7 +42,7 @@ Encoder stack basically extracts the contextual information of the data using at
 
 ###### Attention Mechanism:
 
-It is the key component of the encoder stack it is implemented using attention heads. Attention heads compute relavance of each point in sequence with every other point in the sequence and thus obtains a contextual information. this is done by computing query,key and value vectors which are obtained by multiplying the input with trainable weights.contextual information is obtained by computing the scaled dot product of the query,key and values given as\
+It is the key component of the encoder stack it is implemented using attention heads. Attention heads compute relavance of each point in sequence with every other point in the sequence and thus obtains a contextual information. this is done by computing query,key and value vectors which are obtained by multiplying the input with trainable weights.contextual information is obtained by computing the scaled dot product of the query,key and values given as
 
   attention(Q,K,V) = softmax (QKT √ dK ) V,
 
