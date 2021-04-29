@@ -11,7 +11,7 @@ object=Transformer(\
  &nbsp; &nbsp; &nbsp; d_model, # this is length of each vector in the sequence example in case to text it is embedded vector length. \
  &nbsp; &nbsp; &nbsp; num_encoders, # pass number of encoders you want the transformer to have.\
  &nbsp; &nbsp; &nbsp; num_heads, # this specifies number of attention heads inside each encoder.\
- &nbsp; &nbsp; &nbsp; num_classes, # This is number of classes in your data which you want to classify.\ 
+ &nbsp; &nbsp; &nbsp; num_classes, # This is number of classes in your data which you want to classify. 
  &nbsp; &nbsp; &nbsp; expected_length, # This argument specifies length of query key and value vectors that are computed inside the attention heads.\
  )\
  compile the object with your required optimizer and loss metric\
