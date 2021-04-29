@@ -12,7 +12,7 @@ object=Transformer(
         num_encoders, # pass number of encoders you want the transformer to have
         num_heads, # this specifies number of attention heads inside each encoder.
         num_classes, # This is number of classes in your data which you want to classify 
-        expected_len, # This argument specifies length of query key and value vectors that are computed inside the attention heads.
+        expected_length, # This argument specifies length of query key and value vectors that are computed inside the attention heads.
         )
  compile the object with your required optimizer and loss metric
  and object.fir(arguments) will train the model.
