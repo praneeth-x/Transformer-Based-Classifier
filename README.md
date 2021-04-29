@@ -1,9 +1,9 @@
 # Transformer-Based-Classifier
 A sequence Classifier is implemented with the help of transformer attention mechanism
 # How to Use?
-To avoid package collisions and creating new virtual environments setup.py file is not included in the package 
-To use the Transformer directly you can download the entire package
-keep the code you are writing tin the same folder in which the current package is downloaded inside your code file include the import as 
+To avoid package collisions and creating new virtual environments setup.py file is not included in the package \
+To use the Transformer directly you can download the entire package\
+keep the code you are writing tin the same folder in which the current package is downloaded inside your code file include the import as \
 **from transformer import Transformer**
 Now declare a Transformer object as the pass the required arguments. Transformer takes 6 arguments as shown below.
 object=Transformer(\
