@@ -16,12 +16,12 @@ object=Transformer(\
  )\
  compile the object with your required optimizer and loss metric\
  and object.fir(arguments) will train the model.\
- object(input) will give the predicitons for the input passed //must be in the format and shape of the training input.
+ object(input) will give the predicitons for the input passed must be in the format and shape of the training input.
 # How it Works?
 The sequential data is classified using Transformer Attention mechanism. \
 Each Point in sequence is a vector of size d_model total sequence. example in a word sequence(sentence) each word is encoded as 1-D vector of size d_model 
 Total sequence length is of max_seq_len \
-The input is going to be 2-D array with words stacked along axis=1(or can be seen as y-axis) each word is embedded as vector of size d_model that will extend on x-axis.(basically words are stacked on top of other until max_seq_len words)\ 
+The input is going to be 2-D array with words stacked along axis=1(or can be seen as y-axis) each word is embedded as vector of size d_model that will extend on x-axis.(basically words are stacked on top of other until max_seq_len words)
 
 ### The model Mainly Contains of 3 key modules
 
