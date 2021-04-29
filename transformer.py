@@ -17,14 +17,14 @@ def positional_encoding(max_seq_len,d_model):
 	return tf.constant(positional,shape=(max_seq_len,d_model),dtype='float32')
 
 class Transformer(keras.Model):
-	def __init__(self,max_seq_len,d_model,num_encoders,num_heads,num_classes,expected_len):
+	def __init__(self,max_seq_len,d_model,num_encoders,num_heads,num_classes,expected_length):
 		super(Transformer,self).__init__()
 		self.max_seq_len=max_seq_len
 		self.d_model=d_model
 		self.num_encoders=num_encoders
 		self.num_heads=num_heads
 		self.num_classes=num_classes
-		self.expected_len=expected_len # can change the expected len of the query key and value vectors
+		self.expected_len=expected_length # can change the expected len of the query key and value vectors
 		self.num_features=max_seq_len*d_model
 		self.classify=Classification.classification_model(num_layers=4,num_classes=self.num_classes,feature_no=self.num_features)
 		self.encoder_list=[]
